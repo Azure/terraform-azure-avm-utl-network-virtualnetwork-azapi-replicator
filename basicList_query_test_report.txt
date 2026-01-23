@@ -1,0 +1,19 @@
+Test Execution Report for basicList_query
+=========================================
+
+Test Case: basicList_query
+Date: 2026-01-07 12:19:21
+
+Status: CANNOT EXECUTE
+
+Reason:
+The test case directory 'azurermacctest\basicList_query' does not exist.
+According to test_cases.md, this test case has not been extracted yet.
+
+Action Required:
+1. Extract the test case from the source file:
+   https://raw.githubusercontent.com/hashicorp/terraform-provider-azurerm/refs/heads/main/internal/services/network/virtual_network_resource_list_test.go
+2. Create the test directory structure with main.tf, azurerm.tf, and azapi.tf.bak
+3. Run the test workflow again
+
+Current Test Status in test_cases.md: test case not extracted yet - needs extraction before testing

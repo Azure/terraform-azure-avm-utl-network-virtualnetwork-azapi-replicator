@@ -1,0 +1,120 @@
+{
+  "addressSpace": {
+    "addressPrefixes": [
+      "10.0.0.0/16",
+      "ace:cab:deca::/48"
+    ]
+  },
+  "dhcpOptions": {
+    "dnsServers": []
+  },
+  "enableDdosProtection": false,
+  "etag": "W/\"51d43509-01bb-4f44-9aa8-f4af30be90d8\"",
+  "id": "/subscriptions/f7a632a5-49db-4c5e-9828-cd62cb753971/resourceGroups/acctestRG-147823/providers/Microsoft.Network/virtualNetworks/acctestvirtnet147823",
+  "location": "eastus",
+  "name": "acctestvirtnet147823",
+  "provisioningState": "Succeeded",
+  "resourceGroup": "acctestRG-147823",
+  "resourceGuid": "e5f2f0bc-022c-4ab0-8fdc-fb7804fc56bc",
+  "subnets": [
+    {
+      "addressPrefix": "10.0.2.0/24",
+      "delegations": [
+        {
+          "actions": [
+            "Microsoft.Network/virtualNetworks/subnets/action"
+          ],
+          "etag": "W/\"51d43509-01bb-4f44-9aa8-f4af30be90d8\"",
+          "id": "/subscriptions/f7a632a5-49db-4c5e-9828-cd62cb753971/resourceGroups/acctestRG-147823/providers/Microsoft.Network/virtualNetworks/acctestvirtnet147823/subnets/subnet2/delegations/containers",
+          "name": "containers",
+          "provisioningState": "Succeeded",
+          "resourceGroup": "acctestRG-147823",
+          "serviceName": "Microsoft.ContainerInstance/containerGroups",
+          "type": "Microsoft.Network/virtualNetworks/subnets/delegations"
+        }
+      ],
+      "etag": "W/\"51d43509-01bb-4f44-9aa8-f4af30be90d8\"",
+      "id": "/subscriptions/f7a632a5-49db-4c5e-9828-cd62cb753971/resourceGroups/acctestRG-147823/providers/Microsoft.Network/virtualNetworks/acctestvirtnet147823/subnets/subnet2",
+      "name": "subnet2",
+      "privateEndpointNetworkPolicies": "Disabled",
+      "privateLinkServiceNetworkPolicies": "Disabled",
+      "provisioningState": "Succeeded",
+      "resourceGroup": "acctestRG-147823",
+      "serviceEndpointPolicies": [
+        {
+          "id": "/subscriptions/f7a632a5-49db-4c5e-9828-cd62cb753971/resourceGroups/acctestRG-147823/providers/Microsoft.Network/serviceEndpointPolicies/acctestSEP-147823",
+          "resourceGroup": "acctestRG-147823"
+        }
+      ],
+      "serviceEndpoints": [
+        {
+          "locations": [
+            "eastus",
+            "westus",
+            "westus3"
+          ],
+          "provisioningState": "Succeeded",
+          "service": "Microsoft.Storage"
+        }
+      ],
+      "type": "Microsoft.Network/virtualNetworks/subnets"
+    },
+    {
+      "addressPrefixes": [
+        "10.0.1.0/24",
+        "ace:cab:deca::/64"
+      ],
+      "delegations": [
+        {
+          "actions": [
+            "Microsoft.Network/virtualNetworks/subnets/join/action"
+          ],
+          "etag": "W/\"51d43509-01bb-4f44-9aa8-f4af30be90d8\"",
+          "id": "/subscriptions/f7a632a5-49db-4c5e-9828-cd62cb753971/resourceGroups/acctestRG-147823/providers/Microsoft.Network/virtualNetworks/acctestvirtnet147823/subnets/subnet1/delegations/nginx",
+          "name": "nginx",
+          "provisioningState": "Succeeded",
+          "resourceGroup": "acctestRG-147823",
+          "serviceName": "NGINX.NGINXPLUS/nginxDeployments",
+          "type": "Microsoft.Network/virtualNetworks/subnets/delegations"
+        }
+      ],
+      "etag": "W/\"51d43509-01bb-4f44-9aa8-f4af30be90d8\"",
+      "id": "/subscriptions/f7a632a5-49db-4c5e-9828-cd62cb753971/resourceGroups/acctestRG-147823/providers/Microsoft.Network/virtualNetworks/acctestvirtnet147823/subnets/subnet1",
+      "name": "subnet1",
+      "privateEndpointNetworkPolicies": "Enabled",
+      "privateLinkServiceNetworkPolicies": "Disabled",
+      "provisioningState": "Succeeded",
+      "resourceGroup": "acctestRG-147823",
+      "serviceEndpointPolicies": [
+        {
+          "id": "/subscriptions/f7a632a5-49db-4c5e-9828-cd62cb753971/resourceGroups/acctestRG-147823/providers/Microsoft.Network/serviceEndpointPolicies/acctestSEP-147823",
+          "resourceGroup": "acctestRG-147823"
+        }
+      ],
+      "serviceEndpoints": [
+        {
+          "locations": [
+            "eastus",
+            "westus",
+            "westus3"
+          ],
+          "provisioningState": "Succeeded",
+          "service": "Microsoft.Storage"
+        },
+        {
+          "locations": [
+            "eastus"
+          ],
+          "provisioningState": "Succeeded",
+          "service": "Microsoft.Sql"
+        }
+      ],
+      "type": "Microsoft.Network/virtualNetworks/subnets"
+    }
+  ],
+  "tags": {
+    "environment": "Production"
+  },
+  "type": "Microsoft.Network/virtualNetworks",
+  "virtualNetworkPeerings": []
+}

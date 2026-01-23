@@ -1,0 +1,54 @@
+Test Case Extraction and Conversion Report
+==========================================
+
+Test Case: basicList_query
+Date: 2026-01-07 14:14:50
+
+PART 1: EXTRACTION - COMPLETED
+--------------------------------
+Source: virtual_network_resource_list_test.go
+Method: VirtualNetworkResource.basicList_query(data acceptance.TestData)
+
+Special Note:
+This is a QUERY-ONLY test case. The method contains a 'list' block for querying
+virtual networks, not creating them. No azurerm_virtual_network resources exist
+in this test method.
+
+Files Created:
+1. azurermacctest\basicList_query\main.tf
+   - Terraform and provider blocks configured
+   - random_integer resource for dynamic naming
+   - azurerm_resource_group for the test resource group
+   - list block for querying virtual networks
+
+Transformations Applied:
+- data.RandomInteger → random_integer.number.result
+- data.Locations.Primary → "eastus"
+- Single random_integer resource (min=100000, max=999999)
+
+PART 2: CONVERSION TO AZAPI - COMPLETED
+-----------------------------------------
+Special Case Handling:
+This test case does NOT create any azurerm_virtual_network resources.
+It only queries existing resources using the 'list' block.
+
+Files Created:
+1. azurermacctest\basicList_query\azurerm.tf
+   - Comment explaining this is a query-only test
+
+2. azurermacctest\basicList_query\azapi.tf.bak
+   - Comment explaining no conversion is needed for query operations
+
+3. azurermacctest\basicList_query\moved.tf.bak
+   - Comment explaining no moved block is needed
+
+Result: The 'list' block remains in main.tf as-is since it's a query
+operation, not a resource creation that needs AzAPI conversion.
+
+SUMMARY
+-------
+Status: ✅ COMPLETED
+Test Case Type: Query-only (List operation)
+Action: Extracted test configuration successfully
+Note: No AzAPI conversion needed as this tests query functionality only
+

@@ -1,0 +1,25 @@
+Test Case: ip_address_pool_number_updated
+================================================================================
+
+Initial Error:
+Error: Error in function call
+
+  on ..\..\migrate_main.tf line 17, in locals:
+  17:   effective_address_space = local.address_space_should_suppress ? coalesce(local.existing_address_space, local.desired_address_space) : local.desired_address_space
+    ├────────────────
+    │ while calling coalesce(vals...)
+    │ local.desired_address_space is null
+    │ local.existing_address_space is null
+
+Call to function "coalesce" failed: no non-null, non-empty-string arguments.
+
+Fix Process:
+
+Attempt 1:
+- Problem Analysis: When ip_address_pool is used without address_space, on first deployment (no existing resource), both existing_address_space and desired_address_space are null. The coalesce function fails because it requires at least one non-null value. This is a module implementation bug in migrate_main.tf line 17.
+- Fix Method: Wrap the coalesce call with try() to handle the case when both values are null. Changed line 17 to: `effective_address_space = local.address_space_should_suppress ? try(coalesce(local.existing_address_space, local.desired_address_space), null) : local.desired_address_space`
+- Changes Made: Updated migrate_main.tf line 17 to use try() wrapper around coalesce, allowing it to return null when both address space values are null, which is appropriate for ip_address_pool managed deployments.
+- Result: Success - Resource created successfully
+
+Final Result: Fix successful
+

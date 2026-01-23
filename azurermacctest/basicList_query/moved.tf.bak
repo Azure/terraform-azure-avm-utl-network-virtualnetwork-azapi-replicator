@@ -1,0 +1,2 @@
+# This test case (basicList_query) is a query-only test case.
+# There is no resource to migrate, so no moved block is needed.

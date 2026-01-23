@@ -1,0 +1,12 @@
+# This test case (basicList_query) is a query-only test case.
+# It uses the 'list' block to query virtual networks, not create them.
+# There is no azurerm_virtual_network resource to convert to AzAPI.
+# The 'list' block remains in main.tf as it is a query operation, not a resource creation.
+#
+# Query block (remains in main.tf):
+# list "azurerm_virtual_network" "test" {
+#   provider = azurerm
+#   config {
+#     resource_group_name = "acctestRG-${random_integer.number.result}"
+#   }
+# }

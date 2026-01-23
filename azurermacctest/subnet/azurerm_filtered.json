@@ -1,0 +1,106 @@
+{
+  "addressSpace": {
+    "addressPrefixes": [
+      "10.0.0.0/16",
+      "ace:cab:deca::/48"
+    ]
+  },
+  "dhcpOptions": {
+    "dnsServers": []
+  },
+  "enableDdosProtection": false,
+  "id": "/subscriptions/f7a632a5-49db-4c5e-9828-cd62cb753971/resourceGroups/acctestRG-147823/providers/Microsoft.Network/virtualNetworks/acctestvirtnet147823",
+  "location": "eastus",
+  "name": "acctestvirtnet147823",
+  "resourceGroup": "acctestRG-147823",
+  "subnets": [
+    {
+      "addressPrefix": "10.0.2.0/24",
+      "delegations": [
+        {
+          "actions": [
+            "Microsoft.Network/virtualNetworks/subnets/action"
+          ],
+          "id": "/subscriptions/f7a632a5-49db-4c5e-9828-cd62cb753971/resourceGroups/acctestRG-147823/providers/Microsoft.Network/virtualNetworks/acctestvirtnet147823/subnets/subnet2/delegations/containers",
+          "name": "containers",
+          "resourceGroup": "acctestRG-147823",
+          "serviceName": "Microsoft.ContainerInstance/containerGroups",
+          "type": "Microsoft.Network/virtualNetworks/subnets/delegations"
+        }
+      ],
+      "id": "/subscriptions/f7a632a5-49db-4c5e-9828-cd62cb753971/resourceGroups/acctestRG-147823/providers/Microsoft.Network/virtualNetworks/acctestvirtnet147823/subnets/subnet2",
+      "name": "subnet2",
+      "privateEndpointNetworkPolicies": "Disabled",
+      "privateLinkServiceNetworkPolicies": "Disabled",
+      "resourceGroup": "acctestRG-147823",
+      "serviceEndpointPolicies": [
+        {
+          "id": "/subscriptions/f7a632a5-49db-4c5e-9828-cd62cb753971/resourceGroups/acctestRG-147823/providers/Microsoft.Network/serviceEndpointPolicies/acctestSEP-147823",
+          "resourceGroup": "acctestRG-147823"
+        }
+      ],
+      "serviceEndpoints": [
+        {
+          "locations": [
+            "eastus",
+            "westus",
+            "westus3"
+          ],
+          "service": "Microsoft.Storage"
+        }
+      ],
+      "type": "Microsoft.Network/virtualNetworks/subnets"
+    },
+    {
+      "addressPrefixes": [
+        "10.0.1.0/24",
+        "ace:cab:deca::/64"
+      ],
+      "delegations": [
+        {
+          "actions": [
+            "Microsoft.Network/virtualNetworks/subnets/join/action"
+          ],
+          "id": "/subscriptions/f7a632a5-49db-4c5e-9828-cd62cb753971/resourceGroups/acctestRG-147823/providers/Microsoft.Network/virtualNetworks/acctestvirtnet147823/subnets/subnet1/delegations/nginx",
+          "name": "nginx",
+          "resourceGroup": "acctestRG-147823",
+          "serviceName": "NGINX.NGINXPLUS/nginxDeployments",
+          "type": "Microsoft.Network/virtualNetworks/subnets/delegations"
+        }
+      ],
+      "id": "/subscriptions/f7a632a5-49db-4c5e-9828-cd62cb753971/resourceGroups/acctestRG-147823/providers/Microsoft.Network/virtualNetworks/acctestvirtnet147823/subnets/subnet1",
+      "name": "subnet1",
+      "privateEndpointNetworkPolicies": "Enabled",
+      "privateLinkServiceNetworkPolicies": "Disabled",
+      "resourceGroup": "acctestRG-147823",
+      "serviceEndpointPolicies": [
+        {
+          "id": "/subscriptions/f7a632a5-49db-4c5e-9828-cd62cb753971/resourceGroups/acctestRG-147823/providers/Microsoft.Network/serviceEndpointPolicies/acctestSEP-147823",
+          "resourceGroup": "acctestRG-147823"
+        }
+      ],
+      "serviceEndpoints": [
+        {
+          "locations": [
+            "eastus",
+            "westus",
+            "westus3"
+          ],
+          "service": "Microsoft.Storage"
+        },
+        {
+          "locations": [
+            "eastus"
+          ],
+          "service": "Microsoft.Sql"
+        }
+      ],
+      "type": "Microsoft.Network/virtualNetworks/subnets"
+    }
+  ],
+  "tags": {
+    "environment": "Production"
+  },
+  "type": "Microsoft.Network/virtualNetworks",
+  "virtualNetworkPeerings": []
+}
