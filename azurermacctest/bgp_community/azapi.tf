@@ -1,0 +1,58 @@
+module "replicator" {
+  source = "../.."
+
+  name                = "acctestvirtnet${random_integer.number.result}"
+  location            = azurerm_resource_group.test.location
+  resource_group_name = azurerm_resource_group.test.name
+  resource_group_id   = azurerm_resource_group.test.id
+
+  address_space = toset(["10.0.0.0/16"])
+  bgp_community = "12076:20000"
+
+  subnet = toset([{
+    name                                          = "subnet1"
+    address_prefixes                              = ["10.0.1.0/24"]
+    id                                            = ""
+    private_link_service_network_policies_enabled = true
+    route_table_id                                = ""
+    security_group                                = ""
+    service_endpoint_policy_ids                   = toset([])
+    service_endpoints                             = toset([])
+    delegation                                    = []
+  }])
+
+  enable_telemetry = false
+}
+
+resource "azapi_resource" "this" {
+  type                             = module.replicator.azapi_header.type
+  name                             = module.replicator.azapi_header.name
+  location                         = module.replicator.azapi_header.location
+  parent_id                        = module.replicator.azapi_header.parent_id
+  tags                             = module.replicator.azapi_header.tags
+  body                             = module.replicator.body
+  ignore_null_property             = module.replicator.azapi_header.ignore_null_property
+  sensitive_body                   = module.replicator.sensitive_body
+  sensitive_body_version           = module.replicator.sensitive_body_version
+  replace_triggers_external_values = module.replicator.replace_triggers_external_values
+  locks                            = module.replicator.locks
+  retry                            = module.replicator.retry
+
+  dynamic "identity" {
+    for_each = try(module.replicator.azapi_header.identity != null, false) ? [module.replicator.azapi_header.identity] : []
+    content {
+      type         = identity.value.type
+      identity_ids = try(identity.value.identity_ids, null)
+    }
+  }
+
+  dynamic "timeouts" {
+    for_each = module.replicator.timeouts != null ? [module.replicator.timeouts] : []
+    content {
+      create = timeouts.value.create
+      delete = timeouts.value.delete
+      read   = timeouts.value.read
+      update = timeouts.value.update
+    }
+  }
+}

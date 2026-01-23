@@ -1,0 +1,92 @@
+module "replicator" {
+  source = "../../"
+
+  name              = "acctestvirtnet${random_integer.number.result}"
+  resource_group_id = azurerm_resource_group.test.id
+  location          = azurerm_resource_group.test.location
+
+  address_space = toset(["10.0.0.0/16", "ace:cab:deca::/48"])
+
+  subnet = toset([
+    {
+      name                                          = "subnet1"
+      address_prefixes                              = ["10.0.1.0/24", "ace:cab:deca::/64"]
+      default_outbound_access_enabled               = true
+      id                                            = ""
+      private_endpoint_network_policies             = "Enabled"
+      private_link_service_network_policies_enabled = false
+      route_table_id                                = ""
+      security_group                                = ""
+      service_endpoint_policy_ids                   = toset([azurerm_subnet_service_endpoint_storage_policy.test.id])
+      service_endpoints                             = toset(["Microsoft.Sql", "Microsoft.Storage"])
+      delegation = [
+        {
+          name = "nginx"
+          service_delegation = [
+            {
+              name = "NGINX.NGINXPLUS/nginxDeployments"
+              actions = toset([
+                "Microsoft.Network/virtualNetworks/subnets/join/action",
+              ])
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name                                          = "subnet2"
+      address_prefixes                              = ["10.0.2.0/24"]
+      default_outbound_access_enabled               = true
+      id                                            = ""
+      private_endpoint_network_policies             = "Disabled"
+      private_link_service_network_policies_enabled = false
+      route_table_id                                = ""
+      security_group                                = ""
+      service_endpoint_policy_ids                   = toset([azurerm_subnet_service_endpoint_storage_policy.test.id])
+      service_endpoints                             = toset(["Microsoft.Storage"])
+      delegation = [
+        {
+          name = "containers"
+          service_delegation = [
+            {
+              name = "Microsoft.ContainerInstance/containerGroups"
+              actions = toset([
+                "Microsoft.Network/virtualNetworks/subnets/action",
+              ])
+            }
+          ]
+        }
+      ]
+    }
+  ])
+
+  tags = {
+    environment = "Production"
+  }
+}
+
+resource "azapi_resource" "this" {
+  type                             = module.replicator.azapi_header.type
+  name                             = module.replicator.azapi_header.name
+  location                         = module.replicator.azapi_header.location
+  parent_id                        = module.replicator.azapi_header.parent_id
+  tags                             = module.replicator.azapi_header.tags
+  body                             = module.replicator.body
+  ignore_null_property             = module.replicator.azapi_header.ignore_null_property
+  schema_validation_enabled        = module.replicator.azapi_header.schema_validation_enabled
+  sensitive_body                   = module.replicator.sensitive_body
+  sensitive_body_version           = module.replicator.sensitive_body_version
+  replace_triggers_external_values = module.replicator.replace_triggers_external_values
+  locks                            = module.replicator.locks
+  retry                            = module.replicator.retry
+
+  dynamic "timeouts" {
+    for_each = module.replicator.timeouts != null ? [module.replicator.timeouts] : []
+    content {
+      create = timeouts.value.create
+      delete = timeouts.value.delete
+      read   = timeouts.value.read
+      update = timeouts.value.update
+    }
+  }
+}

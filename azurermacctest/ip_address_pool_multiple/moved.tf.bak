@@ -1,0 +1,4 @@
+moved {
+  from = azurerm_virtual_network.test
+  to   = azapi_resource.this
+}
