@@ -11,12 +11,11 @@ resource "azurerm_resource_group" "test" {
 module "replicator" {
   source = "../.."
 
-  location            = azurerm_resource_group.test.location
-  name                = "acctestvirtnet${random_integer.number.result}"
-  resource_group_id   = azurerm_resource_group.test.id
-  address_space       = toset(["10.0.0.0/16"])
-  enable_telemetry    = var.enable_telemetry
-  resource_group_name = azurerm_resource_group.test.name
+  location          = azurerm_resource_group.test.location
+  name              = "acctestvirtnet${random_integer.number.result}"
+  resource_group_id = azurerm_resource_group.test.id
+  address_space     = toset(["10.0.0.0/16"])
+  enable_telemetry  = var.enable_telemetry
   subnet = toset([
     {
       name                                          = "subnet1"
